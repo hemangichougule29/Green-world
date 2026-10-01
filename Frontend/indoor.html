@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Indoor Plants | GreenLeaf Nursery</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f8f3;
+            color: #263a29;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #173d25;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #fff;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #a8d86e;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .nav-links a:hover {
+            color: #a8d86e;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(
+                rgba(20, 60, 35, 0.8),
+                rgba(20, 60, 35, 0.8)
+            ),
+            url("images/indoor-banner.jpg");
+
+            background-size: cover;
+            background-position: center;
+
+            min-height: 320px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+            color: white;
+            padding: 30px;
+        }
+
+        .hero h1 {
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 650px;
+            line-height: 1.6;
+        }
+
+        /* Search */
+        .search-box {
+            width: 90%;
+            max-width: 500px;
+            margin: 30px auto;
+            display: flex;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #ccc;
+            border-radius: 30px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        /* Section */
+        .section {
+            padding: 30px 7% 60px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            color: #173d25;
+        }
+
+        .section-title p {
+            margin-top: 8px;
+            color: #666;
+        }
+
+        /* Plant Grid */
+        .plant-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        /* Card */
+        .plant-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+            transition: 0.3s;
+        }
+
+        .plant-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .plant-card img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+        }
+
+        .plant-info {
+            padding: 18px;
+        }
+
+        .plant-info h3 {
+            color: #173d25;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .plant-info p {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .rating {
+            color: #e5a900;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #26733c;
+            margin-bottom: 15px;
+        }
+
+        .details-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: #173d25;
+            color: white;
+            padding: 11px;
+            border-radius: 8px;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .details-btn:hover {
+            background: #a8d86e;
+            color: #173d25;
+        }
+
+        /* Footer */
+        footer {
+            background: #173d25;
+            color: white;
+            text-align: center;
+            padding: 22px;
+            margin-top: 30px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1000px) {
+            .plant-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .plant-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .wishlist-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: #fff;
+    color: #173d25;
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #173d25;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: 0.3s;
+}
+
+.wishlist-btn:hover {
+    background: #173d25;
+    color: white;
+}
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <div class="logo">
+            🌿 Green<span>Leaf</span>
+        </div>
+
+        <ul class="nav-links">
+            <a href="index.html">Home</a>
+            <li><a href="indoor.html">Indoor Plants</a></li>
+
+            <a href="../cart.html">Cart 🛒</a>
+            <a href="../history.html">History 📜</a>
+            <li><a href="wishlist.html">❤️ Wishlist</a></li>
+        </ul>
+
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <h1>🌱 Indoor Plants</h1>
+
+        <p>
+            Bring nature indoors with beautiful, easy-to-care-for
+            plants perfect for your home, bedroom and office.
+        </p>
+
+    </section>
+
+
+    <!-- Search -->
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search indoor plants..."
+            onkeyup="searchPlants()"
+        >
+
+    </div>
+
+
+    <!-- Plants -->
+    <section class="section">
+
+        <div class="section-title">
+
+            <h2>Our Indoor Plants</h2>
+
+            <p>
+                Choose the perfect plant for your indoor space 🌿
+            </p>
+
+        </div>
+
+
+        <div class="plant-grid" id="plantGrid">
+
+
+            <!-- Snake Plant -->
+            <div class="plant-card">
+
+                <img
+                    src="images/indoor snake plant  (2).jpg"
+                    alt="Snake Plant"
+                >
+
+                <div class="plant-info">
+
+                    <h3>Snake Plant</h3>
+
+                    <p>Easy-care indoor plant</p>
+
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <div class="price">
+                        ₹299
+                    </div>
+
+                    <button
+            class="details-btn"
+            onclick="addToCart(
+            'Snake Plant',
+              299,
+            'images/indoor snake plant  (2).jpg'
+           )">
+             🛒 Add to Cart
+            </button>
+            <button 
+            class="wishlist-btn"
+            onclick="addToWishlist(
+                'Snake Plant',
+                299,
+                'images/indoor snake plant  (2).jpg'
+            )">
+            ❤️ Add to Wishlist
+        </button>
+                </div>
+
+            </div>
+
+
+            <!-- Money Plant -->
+            <div class="plant-card">
+
+                <img
+                    src="images/money plant in.jpg"
+                    alt="Money Plant"
+                >
+
+                <div class="plant-info">
+
+                    <h3>Money Plant</h3>
+
+                    <p>Beautiful climbing indoor plant</p>
+
+                    <div class="rating">
+                        ⭐⭐⭐⭐☆
+                    </div>
+
+                    <div class="price">
+                        ₹199
+                    </div>
+
+                    <button
+                        class="details-btn"
+                        onclick="addToCart(
+                            'Money Plant',
+                            199,
+                            'images/money plant in.jpg'
+                        )">
+                        🛒 Add to Cart
+                    </button>
+                    <button 
+                    class="wishlist-btn"
+                    onclick="addToWishlist(
+                        'Money Plant',
+                        199,
+                        'images/money plant in.jpg'
+                    )">
+                    ❤️ Add to Wishlist
+                </button>
+                </div>
+
+            </div>
+
+
+            <!-- Peace Lily -->
+            <div class="plant-card">
+
+                <img
+                    src="images/peace lilly in.jpg"
+                    alt="Peace Lily"
+                >
+
+                <div class="plant-info">
+
+                    <h3>Peace Lily</h3>
+
+                    <p>Elegant flowering indoor plant</p>
+
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <div class="price">
+                        ₹349
+                    </div>
+
+                    <button
+                        class="details-btn"
+                        onclick="addToCart(
+                            'Peace Lily',
+                            349,
+                            'images/peace lilly in.jpg'
+                        )">
+                        🛒 Add to Cart
+                    </button>
+                    <button 
+                    class="wishlist-btn"
+                    onclick="addToWishlist(
+                        'Peace Lily',
+                        349,
+                        'images/peace lilly in.jpg'
+                    )">
+                    ❤️ Add to Wishlist
+                </button>
+                </div>
+
+            </div>
+
+
+            <!-- ZZ Plant -->
+            <div class="plant-card">
+
+                <img
+                    src="images/zz plant in.jpg"
+                    alt="ZZ Plant"
+                >
+
+                <div class="plant-info">
+
+                    <h3>ZZ Plant</h3>
+
+                    <p>Low-maintenance indoor plant</p>
+
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <div class="price">
+                        ₹399
+                    </div>
+
+                    <button
+                        class="details-btn"
+                        onclick="addToCart(
+                            'ZZ Plant',
+                            399,
+                            'images/zz plant in.jpg'
+                        )">
+                        🛒 Add to Cart
+                    </button>
+                    <button 
+    class="wishlist-btn"
+    onclick="addToWishlist(
+        'ZZ Plant',
+        399,
+        'images/zz plant in.jpg'
+    )">
+    ❤️ Add to Wishlist
+</button>
+                </div>
+
+            </div>
+
+
+            <!-- Spider Plant -->
+            <div class="plant-card">
+
+                <img
+                    src="images/spider plant.jpg"
+                    alt="Spider Plant"
+                >
+
+                <div class="plant-info">
+
+                    <h3>Spider Plant</h3>
+
+                    <p>Fast-growing indoor plant</p>
+
+                    <div class="rating">
+                        ⭐⭐⭐⭐☆
+                    </div>
+
+                    <div class="price">
+                        ₹249
+                    </div>
+
+                    <button
+                        class="details-btn"
+                        onclick="addToCart(
+                            'Spider Plant',
+                            249,
+                            'images/spider plant.jpg'
+                        )">
+                        🛒 Add to Cart
+                    </button>
+                    <button 
+                    class="wishlist-btn"
+                    onclick="addToWishlist(
+                        'Spider Plant',
+                        249,
+                        'images/spider plant.jpg'
+                    )">
+                    ❤️ Add to Wishlist
+                </button>
+                </div>
+
+            </div>
+
+
+            <!-- Areca Palm -->
+            <div class="plant-card">
+
+                <img
+                    src="images/areca palm.jpg"
+                    alt="Areca Palm"
+                >
+
+                <div class="plant-info">
+
+                    <h3>Areca Palm</h3>
+
+                    <p>Beautiful tropical indoor plant</p>
+
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <div class="price">
+                        ₹499
+                    </div>
+
+                    <button
+                        class="details-btn"
+                        onclick="addToCart(
+                            'Areca Palm',
+                            499,
+                            'images/areca palm.jpg'
+                        )">
+                        🛒 Add to Cart
+                    </button>
+                    <button 
+                    class="wishlist-btn"
+                    onclick="addToWishlist(
+                        'Areca Palm',
+                        499,
+                        'images/areca palm.jpg'
+                    )">
+                    ❤️ Add to Wishlist
+                </button>
+                </div>
+
+            </div>
+
+
+            <!-- Rubber Plant -->
+            <div class="plant-card">
+
+                <img
+                    src="images/rubber plant.jpg"
+                    alt="Rubber Plant"
+                >
+
+                <div class="plant-info">
+
+                    <h3>Rubber Plant</h3>
+
+                    <p>Stylish indoor decorative plant</p>
+
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <div class="price">
+                        ₹449
+                    </div>
+
+                    <button
+                        class="details-btn"
+                        onclick="addToCart(
+                            'Rubber Plant',
+                            449,
+                            'images/rubber plant.jpg'
+                        )">
+                        🛒 Add to Cart
+                    </button>
+                    <button 
+                    class="wishlist-btn"
+                    onclick="addToWishlist(
+                        'Rubber Plant',
+                        449,
+                        'images/rubber plant.jpg'
+                    )">
+                    ❤️ Add to Wishlist
+                </button>
+                </div>
+
+            </div>
+
+
+            <!-- Lucky Bamboo -->
+            <div class="plant-card">
+
+                <img
+                    src="images/Lucky Bamboo (1).jpg"
+                    alt="Lucky Bamboo"
+                >
+
+                <div class="plant-info">
+
+                    <h3>Lucky Bamboo</h3>
+
+                    <p>Popular decorative indoor plant</p>
+
+                    <div class="rating">
+                        ⭐⭐⭐⭐☆
+                    </div>
+
+                    <div class="price">
+                        ₹299
+                    </div>
+
+                    <button
+                        class="details-btn"
+                        onclick="addToCart(
+                            'Lucky Bamboo',
+                            299,
+                            'images/ Lucky Bamboo (1).jpg'
+                        )">
+                        🛒 Add to Cart
+                    </button>
+                    <button 
+                    class="wishlist-btn"
+                    onclick="addToWishlist(
+                        'Lucky Bamboo',
+                        299,
+                        'images/ Lucky Bamboo (1).jpg'
+                    )">
+                    ❤️ Add to Wishlist
+                </button>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            © 2026 GreenLeaf Nursery | Grow Green, Live Green 🌿
+        </p>
+
+    </footer>
+
+
+    <!-- Search JavaScript -->
+    <script>
+
+        function searchPlants() {
+
+            let input =
+                document
+                .getElementById("searchInput")
+                .value
+                .toLowerCase();
+
+            let cards =
+                document.querySelectorAll(".plant-card");
+
+            cards.forEach(function(card) {
+
+                let name =
+                    card
+                    .querySelector("h3")
+                    .innerText
+                    .toLowerCase();
+
+                if (name.includes(input)) {
+
+                    card.style.display = "block";
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+        }
+
+    </script>
+
+    <!-- Cart JavaScript -->
+    <script src="../cart.js"></script>
+    
+    <script>
+
+        async function addToWishlist(name, price, image) {
+            const userEmail = localStorage.getItem("greenleafUserEmail");
+            
+            if (userEmail) {
+                try {
+                    const response = await fetch("http://127.0.0.1:5000/api/wishlist/add", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email: userEmail, name, price, image })
+                    });
+                    const data = await response.json();
+                    if (response.ok && data.success) {
+                        alert("❤️ " + name + " added to your wishlist!");
+                    } else {
+                        alert("❤️ " + name + " is already in your wishlist!");
+                    }
+                } catch (error) {
+                    console.error("Server error", error);
+                    fallbackAddToWishlist(name, price, image);
+                }
+            } else {
+                fallbackAddToWishlist(name, price, image);
+            }
+        }
+
+        function fallbackAddToWishlist(name, price, image) {
+            let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+            let exists = wishlist.some(function(plant) {
+                return plant.name === name;
+            });
+
+            if (exists) {
+                alert("❤️ " + name + " is already in your wishlist!");
+                return;
+            }
+
+            wishlist.push({ name: name, price: price, image: image });
+            localStorage.setItem("wishlist", JSON.stringify(wishlist));
+            alert("🌿 " + name + " added to wishlist!");
+        }
+        
+        </script>
+</body>
+</html>

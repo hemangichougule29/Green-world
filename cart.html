@@ -1,0 +1,398 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>My Cart | GreenLeaf Nursery</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f8f3;
+            margin: 0;
+        }
+
+        .navbar {
+            background: #173d25;
+            padding: 18px 7%;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 25px;
+        }
+
+        .cart-container {
+            width: 85%;
+            margin: 40px auto;
+        }
+
+        .cart-item {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 20px;
+
+            box-shadow:
+                0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-item img {
+
+            width: 120px;
+            height: 120px;
+
+            object-fit: cover;
+
+            border-radius: 10px;
+
+            background: #eef3ec;
+        }
+
+        .cart-info {
+            flex: 1;
+        }
+
+        button {
+
+            padding: 8px 14px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            background: #173d25;
+
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        .remove-btn {
+            background: #dc3545;
+        }
+
+        .quantity {
+
+            margin: 0 10px;
+
+            font-weight: bold;
+        }
+
+        .total {
+
+            background: white;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            text-align: right;
+
+            margin-top: 20px;
+        }
+
+        .empty-cart {
+
+            background: white;
+
+            padding: 40px;
+
+            text-align: center;
+
+            border-radius: 12px;
+        }
+
+        @media (max-width: 600px) {
+
+            .cart-container {
+                width: 92%;
+            }
+
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .cart-item img {
+                width: 100%;
+                height: 200px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <a href="Frontend/index.html">
+            Home
+        </a>
+
+        <a href="Frontend/indoor.html">
+            Indoor Plants
+        </a>
+
+        <a href="Frontend/outdoor.html">
+            Outdoor Plants
+        </a>
+
+        <a href="cart.html">
+            🛒 Cart
+        </a>
+
+        <a href="history.html">
+            📜 History
+        </a>
+
+    </div>
+
+
+
+    <!-- CART -->
+
+    <div class="cart-container">
+
+        <h1>🛒 My Cart</h1>
+
+        <div id="cartContainer"></div>
+
+        <div class="total">
+
+            <h2>
+                Total: ₹<span id="cartTotal">0</span>
+            </h2>
+
+            <button onclick="checkout()">
+                Place Order
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- CART JS -->
+
+    <script src="cart.js"></script>
+
+
+    <script>
+
+        const userEmail = localStorage.getItem("greenleafUserEmail");
+
+        // ==========================================
+        // FIX IMAGE PATH
+        // ==========================================
+        function getImagePath(image) {
+            if (!image) return "Frontend/images/plant-placeholder.jpg";
+            image = String(image).trim();
+            if (image.startsWith("Frontend/")) return image;
+            if (image.startsWith("Bootstrap/")) return image.replace("Bootstrap/", "Frontend/");
+            if (image.startsWith("images/")) return "Frontend/" + image;
+            if (!image.includes("/") && !image.includes("\\")) return "Frontend/images/" + image;
+            return image.replaceAll("\\", "/");
+        }
+
+        // ==========================================
+        // RENDER CART HTML
+        // ==========================================
+        function renderCart(cartItems) {
+            let container = document.getElementById("cartContainer");
+            let total = 0;
+
+            if (!cartItems || cartItems.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-cart">
+                        <h2>Your cart is empty 🌱</h2>
+                        <p>Add some beautiful plants to your cart.</p>
+                    </div>`;
+                document.getElementById("cartTotal").innerText = "0";
+                return;
+            }
+
+            container.innerHTML = "";
+            cartItems.forEach((product, index) => {
+                let quantity = Number(product.quantity) || 1;
+                let price = Number(product.price) || 0;
+                let subtotal = price * quantity;
+                total += subtotal;
+                let imagePath = getImagePath(product.image);
+
+                container.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${imagePath}" alt="${product.name || "Plant"}" onerror="this.onerror=null; this.src='Frontend/images/plant-placeholder.jpg';">
+                        <div class="cart-info">
+                            <h2>${product.name || "Plant"}</h2>
+                            <p>Price: ₹${price}</p>
+                            <button onclick="updateQuantity('${product.name}', -1, ${index})">−</button>
+                            <span class="quantity">${quantity}</span>
+                            <button onclick="updateQuantity('${product.name}', 1, ${index})">+</button>
+                            <p>Subtotal: ₹${subtotal}</p>
+                            <button class="remove-btn" onclick="removeFromCart('${product.name}', ${index})">Remove</button>
+                        </div>
+                    </div>`;
+            });
+
+            document.getElementById("cartTotal").innerText = total;
+        }
+
+        // ==========================================
+        // DISPLAY CART
+        // ==========================================
+        async function displayCart() {
+            if (userEmail) {
+                // Fetch from Backend
+                try {
+                    const response = await fetch(`http://127.0.0.1:5000/api/cart/${userEmail}`);
+                    const data = await response.json();
+                    if (response.ok && data.success) {
+                        renderCart(data.cart);
+                    } else {
+                        console.error("Failed to load cart");
+                    }
+                } catch (err) {
+                    console.error("Server error", err);
+                    renderCart(JSON.parse(localStorage.getItem("cart")) || []);
+                }
+            } else {
+                renderCart(JSON.parse(localStorage.getItem("cart")) || []);
+            }
+        }
+
+        // ==========================================
+        // UPDATE QUANTITY
+        // ==========================================
+        async function updateQuantity(productName, change, localIndex) {
+            if (userEmail) {
+                try {
+                    const response = await fetch("http://127.0.0.1:5000/api/cart/updateQuantity", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email: userEmail, name: productName, change })
+                    });
+                    const data = await response.json();
+                    if (response.ok && data.success) renderCart(data.cart);
+                } catch (err) {
+                    console.error(err);
+                }
+            } else {
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                let quantity = Number(cart[localIndex].quantity) || 1;
+                let newQty = quantity + change;
+                if (newQty > 0) cart[localIndex].quantity = newQty;
+                else cart.splice(localIndex, 1);
+                localStorage.setItem("cart", JSON.stringify(cart));
+                renderCart(cart);
+            }
+        }
+
+        // ==========================================
+        // REMOVE PRODUCT
+        // ==========================================
+        async function removeFromCart(productName, localIndex) {
+            if (userEmail) {
+                try {
+                    const response = await fetch("http://127.0.0.1:5000/api/cart/remove", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email: userEmail, name: productName })
+                    });
+                    const data = await response.json();
+                    if (response.ok && data.success) renderCart(data.cart);
+                } catch (err) {
+                    console.error(err);
+                }
+            } else {
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                cart.splice(localIndex, 1);
+                localStorage.setItem("cart", JSON.stringify(cart));
+                renderCart(cart);
+            }
+        }
+
+        // ==========================================
+        // CHECKOUT
+        // ==========================================
+        async function checkout() {
+            let total = document.getElementById("cartTotal").innerText;
+            if (total === "0") {
+                alert("Your cart is empty!");
+                return;
+            }
+
+            if (userEmail) {
+                // Backend Checkout
+                try {
+                    const response = await fetch("http://127.0.0.1:5000/api/orders/checkout", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email: userEmail, total })
+                    });
+                    const data = await response.json();
+                    
+                    if (response.ok && data.success) {
+                        alert("Order placed successfully! 🌱");
+                        window.location.href = "history.html";
+                    } else {
+                        alert("Error: " + data.message);
+                    }
+                } catch (err) {
+                    console.error(err);
+                    alert("Could not connect to server");
+                }
+            } else {
+                // Local Storage Checkout (Fallback for Guests)
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                let orders = JSON.parse(localStorage.getItem("orderHistory")) || [];
+                let order = {
+                    orderId: "ORD" + Date.now(),
+                    date: new Date().toLocaleString(),
+                    total: total,
+                    products: cart
+                };
+                orders.push(order);
+                localStorage.setItem("orderHistory", JSON.stringify(orders));
+                localStorage.removeItem("cart");
+
+                alert("Order placed successfully! 🌱");
+                window.location.href = "history.html";
+            }
+        }
+
+        // ==========================================
+        // LOAD CART
+        // ==========================================
+        displayCart();
+    </script>
+
+
+</body>
+
+</html>

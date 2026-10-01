@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup | GreenLeaf Nursery</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f1f8f3;
+            font-family: Arial, sans-serif;
+        }
+
+        .signup-container {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .signup-box {
+            width: 420px;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .signup-box h2 {
+            text-align: center;
+            color: #198754;
+            margin-bottom: 25px;
+        }
+
+        .btn-green {
+            background: #198754;
+            color: white;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-green:hover {
+            background: #146c43;
+            color: white;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-link a {
+            color: #198754;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="signup-container">
+    <div class="signup-box">
+        <h2>🌿 GreenLeaf Nursery</h2>
+        <h4 class="text-center mb-4">Create Account</h4>
+
+        <form id="signupForm">
+            <!-- Full Name -->
+            <div class="mb-3">
+                <label class="form-label">Full Name</label>
+                <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" id="password" class="form-control" placeholder="Create password" minlength="6" required>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="mb-3">
+                <label class="form-label">Confirm Password</label>
+                <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm password" required>
+            </div>
+
+            <!-- Create Account Button -->
+            <button type="submit" class="btn-green" id="signupButton">
+                Create Account
+            </button>
+        </form>
+
+        <!-- Login Link -->
+        <div class="login-link">
+            Already have an account?
+            <a href="login.html">Login</a>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById("signupForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim().toLowerCase();
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    if (password !== confirmPassword) {
+        alert("❌ Passwords do not match!");
+        return;
+    }
+
+    const signupButton = document.getElementById("signupButton");
+    signupButton.disabled = true;
+    signupButton.innerText = "Creating Account...";
+
+    try {
+        const response = await fetch("http://127.0.0.1:5000/api/users/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name, email, password })
+        });
+
+        // हे F12 Console मध्ये तपासा
+        console.log("Status Code:", response.status);
+
+        let data = {};
+        try {
+            data = await response.json();
+            console.log("Response Data:", data);
+        } catch (jsonErr) {
+            console.log("JSON parse error, response might be text");
+        }
+
+        // जर Status 200 किंवा 201 असेल (यशस्वी)
+        if (response.status === 200 || response.status === 201) {
+            localStorage.setItem("greenleafLoggedIn", "true");
+            localStorage.setItem("greenleafUserName", name);
+            localStorage.setItem("greenleafUserEmail", email);
+
+            alert("🌱 Account created successfully! Redirecting...");
+            
+            // Redirect command:
+            window.location.assign("index.html");
+            return;
+        }
+
+        if (response.status === 409) {
+            alert("⚠️ Account already exists. Please login.");
+            window.location.assign("login.html");
+            return;
+        }
+
+        // इतर कोणताही एरर असल्यास
+        alert("Backend कडून एरर आला: " + (data.message || response.statusText));
+
+    } catch (error) {
+        console.error("Network / Server Error:", error);
+        alert("❌ एरर: " + error.message);
+    } finally {
+        signupButton.disabled = false;
+        signupButton.innerText = "Create Account";
+    }
+});
+</script>
+
+</body>
+</html>

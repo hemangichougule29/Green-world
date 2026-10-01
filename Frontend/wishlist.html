@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Wishlist | GreenLeaf Nursery</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <style>
+
+        body {
+
+            background: #f5faf6;
+
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+
+            background: #198754;
+        }
+
+        .navbar-brand,
+        .nav-link {
+
+            color: white !important;
+        }
+
+        .wishlist-container {
+
+            padding: 50px 8%;
+        }
+
+        .plant-card {
+
+            background: white;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.1);
+
+            height: 100%;
+        }
+
+        .plant-card img {
+
+            width: 100%;
+
+            height: 220px;
+
+            object-fit: cover;
+        }
+
+        .plant-info {
+
+            padding: 20px;
+        }
+
+        .remove-btn {
+
+            background: #dc3545;
+
+            color: white;
+
+            border: none;
+
+            padding: 8px 15px;
+
+            border-radius: 6px;
+        }
+
+        .empty {
+
+            text-align: center;
+
+            padding: 80px 20px;
+        }
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f8f3;
+    color: #263a29;
+}
+
+
+/* Navbar */
+
+.navbar {
+    background: #173d25;
+    padding: 18px 7%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #a8d86e;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.nav-links a:hover {
+    color: #a8d86e;
+}
+
+
+/* Wishlist Header */
+
+.wishlist-header {
+    text-align: center;
+    padding: 50px 20px 30px;
+}
+
+.wishlist-header h1 {
+    color: #173d25;
+    font-size: 40px;
+}
+
+.wishlist-header p {
+    color: #666;
+    margin-top: 10px;
+}
+
+
+/* Wishlist Grid */
+
+.wishlist-grid {
+    width: 86%;
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+    gap: 20px;
+
+    padding-bottom: 60px;
+}
+
+
+/* Wishlist Card */
+
+.wishlist-card {
+    background: white;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.08);
+
+    transition: 0.3s;
+}
+
+.wishlist-card:hover {
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.wishlist-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.wishlist-info {
+    padding: 12px;
+}
+
+.wishlist-info h3 {
+    color: #173d25;
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
+.price {
+    color: #26733c;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+
+/* Remove Button */
+
+.remove-btn {
+    width: 100%;
+
+    padding: 8px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #173d25;
+
+    color: white;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.remove-btn:hover {
+    background: #a8d86e;
+    color: #173d25;
+}
+
+
+/* Empty Wishlist */
+
+.empty-wishlist {
+    text-align: center;
+
+    padding: 80px 20px;
+}
+
+.empty-wishlist h2 {
+    color: #173d25;
+
+    margin-bottom: 10px;
+}
+
+.empty-wishlist p {
+    color: #666;
+
+    margin-bottom: 20px;
+}
+
+
+/* Shop Button */
+
+.shop-btn {
+    display: inline-block;
+
+    background: #173d25;
+
+    color: white;
+
+    text-decoration: none;
+
+    padding: 12px 25px;
+
+    border-radius: 8px;
+
+    transition: 0.3s;
+}
+
+.shop-btn:hover {
+    background: #a8d86e;
+
+    color: #173d25;
+}
+
+
+/* Footer */
+
+footer {
+    background: #173d25;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 22px;
+
+    margin-top: 30px;
+}
+
+
+
+/* Responsive */
+
+@media (max-width: 1000px) {
+
+    .wishlist-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .navbar {
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .nav-links {
+        gap: 12px;
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+    .wishlist-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .wishlist-header h1 {
+        font-size: 32px;
+    }
+
+}
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<nav class="navbar navbar-expand-lg">
+
+    <div class="container">
+
+        <a class="navbar-brand"
+           href="index.html">
+
+            🌿 GreenLeaf Nursery
+
+        </a>
+
+
+        <div>
+
+            <a class="nav-link d-inline-block"
+               href="index.html">
+
+                Home
+
+            </a>
+
+            <a class="nav-link d-inline-block"
+               href="wishlist.html">
+
+                ❤️ Wishlist
+
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<div class="wishlist-container">
+
+    <h1 class="text-center mb-5">
+
+        ❤️ My Wishlist
+
+    </h1>
+
+
+    <div
+        id="wishlistContainer"
+        class="row g-4">
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+const userEmail = localStorage.getItem("greenleafUserEmail");
+
+function renderWishlist(wishlist) {
+    const container = document.getElementById("wishlistContainer");
+    container.innerHTML = "";
+
+    if (wishlist.length === 0) {
+        container.innerHTML = `
+            <div class="col-12">
+                <div class="empty">
+                    <h2>❤️ Your Wishlist is Empty</h2>
+                    <p>Add your favourite plants to your wishlist.</p>
+                    <a href="index.html" class="btn btn-success">Explore Plants</a>
+                </div>
+            </div>
+        `;
+        return;
+    }
+
+    wishlist.forEach(function(plant, index) {
+        container.innerHTML += `
+            <div class="col-md-4">
+                <div class="plant-card">
+                    <img src="${plant.image}" alt="${plant.name}">
+                    <div class="plant-info">
+                        <h4>${plant.name}</h4>
+                        <p>₹${plant.price}</p>
+                        <button class="remove-btn" onclick="removeWishlist('${plant.name}', ${index})">Remove ❤️</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+}
+
+async function loadWishlist() {
+    if (userEmail) {
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/api/wishlist/${userEmail}`);
+            const data = await response.json();
+            if (response.ok && data.success) {
+                renderWishlist(data.wishlist);
+            } else {
+                renderWishlist(JSON.parse(localStorage.getItem("wishlist")) || []);
+            }
+        } catch (error) {
+            console.error("Server error", error);
+            renderWishlist(JSON.parse(localStorage.getItem("wishlist")) || []);
+        }
+    } else {
+        renderWishlist(JSON.parse(localStorage.getItem("wishlist")) || []);
+    }
+}
+
+async function removeWishlist(plantName, index) {
+    if (userEmail) {
+        try {
+            const response = await fetch("http://127.0.0.1:5000/api/wishlist/remove", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: userEmail, name: plantName })
+            });
+            const data = await response.json();
+            if (response.ok && data.success) {
+                renderWishlist(data.wishlist);
+            }
+        } catch (error) {
+            console.error("Server error", error);
+        }
+    } else {
+        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        wishlist.splice(index, 1);
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        renderWishlist(wishlist);
+    }
+}
+
+loadWishlist();
+
+</script>
+
+
+</body>
+
+</html>

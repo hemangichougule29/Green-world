@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Order History - Plant Nursery</title>
+
+
+    <style>
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background: #f5f8f3;
+
+            margin: 0;
+
+            padding: 30px;
+
+        }
+
+
+        h1 {
+
+            color: #173d25;
+
+            text-align: center;
+
+        }
+
+
+        #historyContainer {
+
+            width: 85%;
+
+            margin: 30px auto;
+
+        }
+
+
+        .order-card {
+
+            background: white;
+
+            padding: 25px;
+
+            margin-bottom: 25px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 3px 10px
+                rgba(0, 0, 0, 0.1);
+
+        }
+
+
+        .order-card h2 {
+
+            color: #173d25;
+
+        }
+
+
+        .history-product {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+
+            padding: 15px 0;
+
+            border-bottom: 1px solid #ddd;
+
+        }
+
+
+        .history-product img {
+
+            width: 80px;
+
+            height: 80px;
+
+            object-fit: cover;
+
+            border-radius: 10px;
+
+            background: #eef3ec;
+
+        }
+
+
+        .history-product h3 {
+
+            margin: 0 0 8px;
+
+        }
+
+
+        .history-product p {
+
+            margin: 5px 0;
+
+        }
+
+
+        .empty-history {
+
+            background: white;
+
+            padding: 40px;
+
+            text-align: center;
+
+            border-radius: 12px;
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px;
+            }
+
+
+            #historyContainer {
+
+                width: 95%;
+
+            }
+
+
+            .history-product {
+
+                align-items: flex-start;
+
+            }
+
+
+            .history-product img {
+
+                width: 70px;
+
+                height: 70px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <h1>
+        📜 Order History
+    </h1>
+
+
+    <div id="historyContainer"></div>
+
+
+
+    <!-- HISTORY JS -->
+
+    <script src="history.js"></script>
+
+
+</body>
+
+</html>
+

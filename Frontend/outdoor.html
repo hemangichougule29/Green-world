@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Outdoor Plants | GreenLeaf Nursery</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+
+        body {
+            background: #f5f8f3;
+            color: #263a29;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            background: #173d25;
+            padding: 18px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        .logo {
+            color: white;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+
+        .logo span {
+            color: #a8d86e;
+        }
+
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+
+        .nav-links a:hover {
+            color: #a8d86e;
+        }
+
+
+        /* ================= HERO ================= */
+
+        .hero {
+
+            background:
+                linear-gradient(
+                    rgba(20, 60, 35, 0.8),
+                    rgba(20, 60, 35, 0.8)
+                ),
+                url("images/outdoor-banner.jpg");
+
+            background-size: cover;
+            background-position: center;
+
+            min-height: 320px;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            color: white;
+
+            padding: 30px;
+        }
+
+
+        .hero h1 {
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+
+        .hero p {
+            font-size: 18px;
+            max-width: 650px;
+            line-height: 1.6;
+        }
+
+
+        /* ================= SEARCH ================= */
+
+        .search-box {
+            width: 90%;
+            max-width: 500px;
+
+            margin: 30px auto;
+
+            display: flex;
+        }
+
+
+        .search-box input {
+
+            width: 100%;
+
+            padding: 14px 18px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 30px;
+
+            outline: none;
+
+            font-size: 15px;
+        }
+
+
+        .search-box input:focus {
+            border-color: #173d25;
+
+            box-shadow:
+                0 0 5px rgba(23, 61, 37, 0.2);
+        }
+
+
+        /* ================= SECTION ================= */
+
+        .section {
+            padding: 30px 7% 60px;
+        }
+
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+
+        .section-title h2 {
+            font-size: 32px;
+            color: #173d25;
+        }
+
+
+        .section-title p {
+            margin-top: 8px;
+            color: #666;
+        }
+
+
+        /* ================= PLANT GRID ================= */
+
+        .plant-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 25px;
+
+            align-items: stretch;
+        }
+
+
+        /* ================= PLANT CARD ================= */
+
+        .plant-card {
+
+            background: white;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 5px 18px rgba(0, 0, 0, 0.08);
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+
+            height: 100%;
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .plant-card:hover {
+
+            transform: translateY(-8px);
+
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+
+       
+/* ================= IMAGE ================= */
+
+.plant-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    background: white;
+    padding: 5px;
+}
+
+        /* ================= PLANT INFO ================= */
+
+        .plant-info {
+
+            padding: 18px;
+
+            flex: 1;
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .plant-info h3 {
+
+            color: #173d25;
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+        }
+
+
+        .plant-info p {
+
+            color: #777;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            margin-bottom: 10px;
+        }
+
+
+        /* ================= RATING ================= */
+
+        .rating {
+
+            color: #ffc933;
+
+            font-size: 23px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 8px;
+        }
+
+
+        /* ================= PRICE ================= */
+
+        .price {
+
+            font-size: 25px;
+
+            font-weight: bold;
+
+            color: #26733c;
+
+            margin-bottom: 18px;
+        }
+
+
+       
+
+        /* ================= ADD TO CART ================= */
+
+.details-btn {
+    width: 100%;
+    padding: 9px 12px;
+    border-radius: 8px;
+    border: none;
+
+    background: #173d25;
+    color: white;
+
+    font-size: 15px;
+    cursor: pointer;
+
+    margin-top: auto;
+}
+
+.details-btn:hover {
+    background: #a8d86e;
+    color: #173d25;
+}
+
+
+/* ================= WISHLIST ================= */
+
+.wishlist-btn {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 8px;
+
+    border: 2px solid #173d25;
+
+    background: white;
+    color: #173d25;
+
+    font-size: 15px;
+    cursor: pointer;
+
+    margin-top: 8px;
+}
+
+.wishlist-btn:hover {
+    background: #173d25;
+    color: white;
+}
+
+     /* ================= FOOTER ================= */
+
+        footer {
+
+            background: #173d25;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 22px;
+
+            margin-top: 30px;
+        }
+
+
+        /* ================= TABLET ================= */
+
+        @media (max-width: 1000px) {
+
+            .plant-grid {
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+
+            .plant-card img {
+
+                height: 260px;
+            }
+
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+
+            .nav-links {
+
+                gap: 12px;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+
+            .hero h1 {
+
+                font-size: 32px;
+            }
+
+
+            .hero p {
+
+                font-size: 15px;
+            }
+
+
+            .plant-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .plant-card img {
+
+                height: 240px;
+            }
+
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+
+    <div class="logo">
+
+        🌿 Green<span>Leaf</span>
+
+    </div>
+
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="index.html">
+                Home
+            </a>
+        </li>
+
+
+        <li>
+            <a href="outdoor.html">
+                Outdoor Plants
+            </a>
+        </li>
+
+
+        <li>
+            <a href="../cart.html">
+                🛒 Cart
+            </a>
+        </li>
+
+
+        <li>
+            <a href="../history.html">
+                📜 History
+            </a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <h1>
+        🌳 Outdoor Plants
+    </h1>
+
+
+    <p>
+
+        Bring the beauty of nature
+        to your garden, balcony and
+        outdoor spaces with our
+        beautiful outdoor plants.
+
+    </p>
+
+</section>
+
+
+<!-- ================= SEARCH ================= -->
+
+<div class="search-box">
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search outdoor plants..."
+        onkeyup="searchPlants()">
+
+</div>
+
+
+<!-- ================= PLANTS ================= -->
+
+<section class="section">
+
+
+    <div class="section-title">
+
+        <h2>
+            Our Outdoor Plants
+        </h2>
+
+
+        <p>
+            Choose beautiful plants
+            for your outdoor space 🌿
+        </p>
+
+    </div>
+
+
+    <div
+        class="plant-grid"
+        id="plantGrid">
+
+
+        <!-- ================= ROSE ================= -->
+
+        <div class="plant-card">
+
+            <img
+                src="images/Red Rose.jpg"
+                alt="Rose Plant">
+
+
+            <div class="plant-info">
+
+                <h3>
+                    Rose Plant
+                </h3>
+
+
+                <p>
+                    Beautiful flowering garden plant
+                </p>
+
+
+                <div class="rating">
+                    ⭐⭐⭐⭐☆
+                </div>
+
+
+                <div class="price">
+                    ₹249
+                </div>
+
+
+                <button
+                    class="details-btn"
+                    onclick="addToCart(
+                        'Rose Plant',
+                        249,
+                        'images/Red Rose.jpg'
+                    )">
+
+                    🛒 Add to Cart
+
+                </button>
+
+
+                <button
+                    class="wishlist-btn"
+                    onclick="addToWishlist(
+                        'Rose Plant',
+                        249,
+                        'images/Red Rose.jpg',
+                        this
+                    )">
+
+                    ❤️ Add to Wishlist
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= JASMINE ================= -->
+
+        <div class="plant-card">
+
+            <img
+                src="images/jasmin 2.jpg"
+                alt="Jasmine Plant">
+
+
+            <div class="plant-info">
+
+                <h3>
+                    Jasmine Plant
+                </h3>
+
+
+                <p>
+                    Fragrant flowering outdoor plant
+                </p>
+
+
+                <div class="rating">
+                    ⭐⭐⭐⭐⭐
+                </div>
+
+
+                <div class="price">
+                    ₹499
+                </div>
+
+
+                <button
+                    class="details-btn"
+                    onclick="addToCart(
+                        'Jasmine Plant',
+                        499,
+                        'images/jasmin 2.jpg'
+                    )">
+
+                    🛒 Add to Cart
+
+                </button>
+
+
+                <button
+                    class="wishlist-btn"
+                    onclick="addToWishlist(
+                        'Jasmine Plant',
+                        499,
+                        'images/jasmin 2.jpg',
+                        this
+                    )">
+
+                    ❤️ Add to Wishlist
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= HIBISCUS ================= -->
+
+        <div class="plant-card">
+
+            <img
+                src="images/hibiscus.jpg"
+                alt="Hibiscus Plant">
+
+
+            <div class="plant-info">
+
+                <h3>
+                    Hibiscus Plant
+                </h3>
+
+
+                <p>
+                    Bright and colorful flowering plant
+                </p>
+
+
+                <div class="rating">
+                    ⭐⭐⭐⭐⭐
+                </div>
+
+
+                <div class="price">
+                    ₹449
+                </div>
+
+
+                <button
+                    class="details-btn"
+                    onclick="addToCart(
+                        'Hibiscus Plant',
+                        449,
+                        'images/hibiscus 2.jpg'
+                    )">
+
+                    🛒 Add to Cart
+
+                </button>
+
+
+                <button
+                    class="wishlist-btn"
+                    onclick="addToWishlist(
+                        'Hibiscus Plant',
+                        449,
+                        'images/hibiscus 2.jpg',
+                        this
+                    )">
+
+                    ❤️ Add to Wishlist
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= BOUGAINVILLEA ================= -->
+
+        <div class="plant-card">
+
+            <img
+                src="images/Pink Bougainvillea.jpg"
+                alt="Bougainvillea">
+
+
+            <div class="plant-info">
+
+                <h3>
+                    Bougainvillea
+                </h3>
+
+
+                <p>
+                    Colorful flowering outdoor plant
+                </p>
+
+
+                <div class="rating">
+                    ⭐⭐⭐⭐☆
+                </div>
+
+
+                <div class="price">
+                    ₹299
+                </div>
+
+
+                <button
+                    class="details-btn"
+                    onclick="addToCart(
+                        'Bougainvillea',
+                        299,
+                        'images/Pink Bougainvillea.jpg'
+                    )">
+
+                    🛒 Add to Cart
+
+                </button>
+
+
+                <button
+                    class="wishlist-btn"
+                    onclick="addToWishlist(
+                        'Bougainvillea',
+                        299,
+                        'images/Pink Bougainvillea.jpg',
+                        this
+                    )">
+
+                    ❤️ Add to Wishlist
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= MARIGOLD ================= -->
+
+        <div class="plant-card">
+
+            <img
+                src="images/marigold.jpg"
+                alt="Marigold Plant">
+
+
+            <div class="plant-info">
+
+                <h3>
+                    Marigold Plant
+                </h3>
+
+
+                <p>
+                    Easy-growing flowering garden
+                </p>
+
+
+                <div class="rating">
+                    ⭐⭐⭐⭐☆
+                </div>
+
+
+                <div class="price">
+                    ₹149
+                </div>
+
+
+                <button
+                    class="details-btn"
+                    onclick="addToCart(
+                        'Marigold Plant',
+                        149,
+                        'images/marigold.jpg'
+                    )">
+
+                    🛒 Add to Cart
+
+                </button>
+
+
+                <button
+                    class="wishlist-btn"
+                    onclick="addToWishlist(
+                        'Marigold Plant',
+                        149,
+                        'images/marigold.jpg',
+                        this
+                    )">
+
+                    ❤️ Add to Wishlist
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= LEMON ================= -->
+
+        <div class="plant-card">
+
+            <img
+                src="images/lemon.jpg"
+                alt="Lemon Plant">
+
+
+            <div class="plant-info">
+
+                <h3>
+                    Lemon Plant
+                </h3>
+
+
+                <p>
+                    Fruit-bearing outdoor garden plant
+                </p>
+
+
+                <div class="rating">
+                    ⭐⭐⭐⭐⭐
+                </div>
+
+
+                <div class="price">
+                    ₹399
+                </div>
+
+
+                <button
+                    class="details-btn"
+                    onclick="addToCart(
+                        'Lemon Plant',
+                        399,
+                        'images/lemon.jpg'
+                    )">
+
+                    🛒 Add to Cart
+
+                </button>
+
+
+                <button
+                    class="wishlist-btn"
+                    onclick="addToWishlist(
+                        'Lemon Plant',
+                        399,
+                        'images/lemon.jpg',
+                        this
+                    )">
+
+                    ❤️ Add to Wishlist
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= GUAVA ================= -->
+
+        <div class="plant-card">
+
+            <img
+                src="images/Pink Guava.jpg"
+                alt="Guava Plant">
+
+
+            <div class="plant-info">
+
+                <h3>
+                    Guava Plant
+                </h3>
+
+
+                <p>
+                    Healthy fruit-bearing garden plant
+                </p>
+
+
+                <div class="rating">
+                    ⭐⭐⭐⭐⭐
+                </div>
+
+
+                <div class="price">
+                    ₹449
+                </div>
+
+
+                <button
+                    class="details-btn"
+                    onclick="addToCart(
+                        'Guava Plant',
+                        449,
+                        'images/Pink Guava.jpg'
+                    )">
+
+                    🛒 Add to Cart
+
+                </button>
+
+
+                <button
+                    class="wishlist-btn"
+                    onclick="addToWishlist(
+                        'Guava Plant',
+                        449,
+                        'images/Pink Guava.jpg',
+                        this
+                    )">
+
+                    ❤️ Add to Wishlist
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= MORINGA ================= -->
+
+        <div class="plant-card">
+
+            <img
+                src="images/Moringa.jpg"
+                alt="Moringa Plant">
+
+
+            <div class="plant-info">
+
+                <h3>
+                    Moringa Plant
+                </h3>
+
+
+                <p>
+                    Useful and fast-growing
+                </p>
+
+
+                <div class="rating">
+                    ⭐⭐⭐⭐☆
+                </div>
+
+
+                <div class="price">
+                    ₹249
+                </div>
+
+
+                <button
+                    class="details-btn"
+                    onclick="addToCart(
+                        'Moringa Plant',
+                        249,
+                        'images/Moringa.jpg'
+                    )">
+
+                    🛒 Add to Cart
+
+                </button>
+
+
+                <button
+                    class="wishlist-btn"
+                    onclick="addToWishlist(
+                        'Moringa Plant',
+                        249,
+                        'images/Moringa.jpg',
+                        this
+                    )">
+
+                    ❤️ Add to Wishlist
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+
+        © 2026 GreenLeaf Nursery |
+        Grow Green, Live Green 🌿
+
+    </p>
+
+</footer>
+
+
+<!-- ================= SEARCH ================= -->
+
+<script>
+
+function searchPlants() {
+
+    let input =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+
+    let cards =
+        document.querySelectorAll(".plant-card");
+
+
+    cards.forEach(function(card) {
+
+        let name =
+            card
+            .querySelector("h3")
+            .innerText
+            .toLowerCase();
+
+
+        if (name.includes(input)) {
+
+            card.style.display = "flex";
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+</script>
+
+
+<!-- ================= WISHLIST ================= -->
+
+<script>
+
+        async function addToWishlist(name, price, image, button) {
+            const userEmail = localStorage.getItem("greenleafUserEmail");
+            
+            if (userEmail) {
+                try {
+                    const response = await fetch("http://127.0.0.1:5000/api/wishlist/add", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email: userEmail, name, price, image })
+                    });
+                    const data = await response.json();
+                    if (response.ok && data.success) {
+                        button.innerHTML = "❤️ Added to Wishlist";
+                        button.classList.add("added");
+                        alert("❤️ " + name + " added to your wishlist!");
+                    } else {
+                        alert("❤️ " + name + " is already in your wishlist!");
+                    }
+                } catch (error) {
+                    console.error("Server error", error);
+                    fallbackAddToWishlist(name, price, image, button);
+                }
+            } else {
+                fallbackAddToWishlist(name, price, image, button);
+            }
+        }
+
+        function fallbackAddToWishlist(name, price, image, button) {
+            let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+            let exists = wishlist.some(function(item) {
+                return item.name === name;
+            });
+
+            if (exists) {
+                alert("❤️ " + name + " is already in your wishlist!");
+                return;
+            }
+
+            wishlist.push({ name: name, price: price, image: image });
+            localStorage.setItem("wishlist", JSON.stringify(wishlist));
+            
+            button.innerHTML = "❤️ Added to Wishlist";
+            button.classList.add("added");
+            alert("❤️ " + name + " added to your wishlist!");
+        }
+
+</script>
+
+
+<!-- ================= CART JS ================= -->
+
+<script src="../cart.js"></script>
+
+
+</body>
+
+</html>
